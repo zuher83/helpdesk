@@ -44,7 +44,7 @@ class TestHelpdeskPortal(HttpCaseWithUserPortal):
             "/submitted/ticket",
             data={
                 "category": self.env.ref("helpdesk_mgmt.helpdesk_category_1").id,
-                "csrf_token": http.WebRequest.csrf_token(self),
+                "csrf_token": http.Request.csrf_token(self),
                 "subject": self.new_ticket_title,
                 "description": "\n".join(self.new_ticket_desc_lines),
             },
@@ -182,7 +182,7 @@ class TestHelpdeskPortal(HttpCaseWithUserPortal):
         resp = self.url_open(
             "/ticket/close",
             data={
-                "csrf_token": http.WebRequest.csrf_token(self),
+                "csrf_token": http.Request.csrf_token(self),
                 "stage_id": stage.id,
                 "ticket_id": ticket.id,
             },
