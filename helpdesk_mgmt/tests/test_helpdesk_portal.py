@@ -86,9 +86,7 @@ class TestHelpdeskPortal(HttpCaseWithUserPortal):
         resp = self.url_open(f"/my/ticket/{self.portal_ticket.id}")
         self.assertEqual(resp.status_code, 200)
         self.assertIn("portal-ticket-title", resp.text)
-        self.assertIn(
-            "<h4><strong>Message and communication history</strong></h4>", resp.text
-        )
+        self.assertIn("portal-ticket-description", resp.text)
 
     def test_close_ticket(self):
         """Close a ticket from the portal."""
@@ -198,7 +196,7 @@ class TestHelpdeskPortal(HttpCaseWithUserPortal):
         return self.env["helpdesk.ticket"].create(
             {
                 "name": ticket_title,
-                "description": "test-description",
+                "description": "portal-ticket-description",
                 "partner_id": partner.id,
                 "partner_email": partner.email,
                 "partner_name": partner.name,
